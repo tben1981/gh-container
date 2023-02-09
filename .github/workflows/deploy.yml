@@ -11,6 +11,9 @@ jobs:
   test:
     environment: testing
     runs-on: ubuntu-latest
+    container:        # this will allow u to run the below job ina docker container 
+      image: node:16 #You will need the image in places like dockerhub
+    #  env: #Environment needed for this containers mention in dockerhub 
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb+srv
       MONGODB_CLUSTER_ADDRESS: gh-secrets1.ztagxhg.mongodb.net
@@ -19,8 +22,8 @@ jobs:
       PORT: 8080
     steps:
       - name: Get Code
-        uses: actions/checkout@v3
-      - name: Cache dependencies
+        uses: actions/checkout@v3      #this actions will still work even if u run them in containers 
+      - name: Cache dependencies  
         uses: actions/cache@v3
         with:
           path: ~/.npm
